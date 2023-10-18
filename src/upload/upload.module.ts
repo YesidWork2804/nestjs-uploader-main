@@ -4,6 +4,9 @@ import { UploadService } from './upload.service';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import { FileController } from 'src/file/file.controller';
+import { FileService } from 'src/file/file.service';
+import { FileModule } from '../file/file.module';
 
 @Module({
   imports: [
@@ -14,6 +17,7 @@ import { ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
+    FileModule,
   ],
   controllers: [UploadController],
   providers: [

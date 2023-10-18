@@ -1,6 +1,8 @@
 import {
   Controller,
+  Delete,
   Get,
+  Param,
   ParseFilePipe,
   Post,
   UploadedFile,
@@ -8,10 +10,14 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
+import { FileService } from '../file/file.service';
 
 @Controller('upload')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(
+    private readonly uploadService: UploadService,
+    private readonly fileService: FileService, // private readonly fileService: FileService, // private readonly fileService: FileService,
+  ) {}
 
   @UseInterceptors(FileInterceptor('file'))
   @Post()
@@ -29,8 +35,8 @@ export class UploadController {
     await this.uploadService.upload(file.originalname, file.buffer);
   }
 
-  @Get()
-  async getAllFiles() {
-    return this.uploadService.getAllFiles();
-  }
+  // @Delete('/:id')
+  // delete(@Param('id') id:string) {
+  //   return this.fileService.deleteFile(id);
+  // }
 }
