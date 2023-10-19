@@ -27,16 +27,17 @@ export class FileService {
   }
 
   async deleteFile(id: string) {
+    return this.fileRepository.delete(id);
+  }
+
+  async deleteFileS3(name: string) {
     try {
       const command = new DeleteObjectCommand({
         Bucket: 'nestjs-uploader-cloud-class',
-        Key: id,
+        Key: name,
       });
-      const response = await this.s3Client.send(command);
 
-      console.log(response);
-
-      return this.fileRepository.delete(id);
+      await this.s3Client.send(command);
     } catch (error) {
       console.error('Error al eliminar el objeto de S3:', error);
       throw error; // O maneja el error de otra manera según tus necesidades

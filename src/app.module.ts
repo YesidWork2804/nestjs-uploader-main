@@ -11,7 +11,7 @@ import { FileModule } from './file/file.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'testcorte.ckhfjish5u5h.us-east-2.rds.amazonaws.com',
+      host: 'database.ckhfjish5u5h.us-east-2.rds.amazonaws.com',
       port: 3306,
       username: 'admin',
       password: 'admin123',

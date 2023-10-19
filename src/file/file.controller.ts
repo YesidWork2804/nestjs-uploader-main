@@ -22,4 +22,9 @@ export class FileController {
   delete(@Param('id') id: string) {
     return this.fileService.deleteFile(id);
   }
+
+  @Delete('/:name')
+  deleteFileS3(@Param('name') name: string) {
+    return this.fileService.deleteFile(name);
+  }
 }
