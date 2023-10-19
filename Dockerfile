@@ -1,8 +1,8 @@
 # Base image
-FROM node:18
+FROM node:18.17.1
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
@@ -14,9 +14,12 @@ RUN npm install
 COPY . .
 
 # Creates a "dist" folder with the production build
-RUN npm run build
+RUN npm run build --prod
 
 EXPOSE 3000
 
 # Start the server using the production build
-CMD [ "node", "dist/main.js" ]
+# CMD ["npx", "http-server", "dist/","-p 3000"]
+
+CMD [ "node", "dist/main.js","-p 3000"]
+
